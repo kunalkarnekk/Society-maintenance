@@ -1,0 +1,129 @@
+﻿﻿@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<ApplicationUser> signInManager;
+@inject UserManager<ApplicationUser> UserManager;
+
+@{
+    var user = HttpContextAccessor.HttpContext.Session.GetString("User");
+    var societyName = HttpContextAccessor.HttpContext.Session.GetString("SocietyName");
+
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Maintenance_Realation</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" /> 
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <link rel="stylesheet" href="//cdn.datatables.net/1.13.3/css/jquery.dataTables.min.css" />
+   
+
+
+    <link rel="stylesheet" href="~/Maintenance_Realation.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light text-white bg-secondary border-bottom box-shadow mb-3">
+            <div class="container-fluid text-white">
+                <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">
+                    @if (!string.IsNullOrEmpty(societyName))
+                    {
+                        @societyName
+                    }
+                    else
+                    {
+                        @:Society Maintenance
+                    }
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1 text-white">
+                        @* <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li> *@
+                       @*  <li class="nav-item">
+                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li> *@
+                        @{
+                            if (User.IsInRole(SD.Role_Admin) || user != null)
+                                        {
+                                <div class="dropdown">
+                                    <button class="btn text-white dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Manage Society
+                                    </button>
+                                    <ul class=" bg-secondary dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li><a class="dropdown-item text-white" asp-action="Index" asp-controller="FlatOwner">Manage Owners</a></li>
+                                        <li><a class="dropdown-item text-white" asp-action="Upsert" asp-controller="Settings">Settings</a></li>
+                                        <li><a class="dropdown-item text-white" asp-action="Index" asp-controller="Disignation">Designation</a></li>
+                                        <li><a class="dropdown-item text-white" asp-action="RegisterUsers" asp-controller="Admin">Manage Access</a></li>
+                                        <li><a class="dropdown-item text-white" asp-action="Index" asp-controller="SocietyExpense">Manage Expense</a></li>
+                                        <li><a class="dropdown-item text-white" asp-action="AddExpense" asp-controller="Society">Add Society Expense</a></li>
+                                    </ul>
+                                </div>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-action="Index" asp-controller="Maintenance">Manage Maintenance</a>
+                                </li>
+
+                            }
+                            
+                       }
+
+                        
+                       
+                    </ul>
+                </div>
+                @* <partial name="_LoginPartial" /> *@
+                <div class="navbar-nav ml-auto">
+                    
+                  @if(signInManager.IsSignedIn(User))
+                  {
+                    <li class="nav-item justify-context">
+                        <a class="nav-link text-white">Hello @UserManager.GetUserName(User)</a>
+                    </li>
+                   
+                        <li class="nav-item justify-context">
+                            <a class="nav-link text-white" asp-action="Logout" asp-controller="Admin">Log out</a>
+                        </li>
+                  }
+                  else
+                    {
+                        <li class="nav-item justify-context">
+                            <a class="nav-link text-white" asp-action="LoginUsers" asp-controller="Admin">Login</a>
+                        </li>
+                  }
+                   
+                </div>
+            </div>
+
+        </nav>
+    </header> 
+
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            <partial name="_Notification" />
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted position-fixed bottom-0">
+        <div class="container">
+            &copy; 2024 - Maintenance_Realation - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="//cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

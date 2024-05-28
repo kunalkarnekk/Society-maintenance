@@ -1,0 +1,94 @@
+﻿@model Society_Models.ViewModels.MaintenanceVM
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Add Maintenance</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body p-4">
+        <form method="post" asp-action="Create">
+            <div class="border p-3 mt-4">
+                <input asp-for="Maintenance.Id" hidden/>
+                <div class="form-floating py-2 col-12">
+                    <select asp-for="Maintenance.OwnerId" asp-items="@Model.FlatOwnersList"  class="form-select border-0 shadow">
+                        <option value=""> --Select Owner-- </option>
+                    </select>
+                    <label asp-for="Maintenance.OwnerId" class="ms-2">Owner Name</label>
+                    <span asp-validation-for="Maintenance.OwnerId" class="text-danger"></span>
+
+                </div>
+               @*  <div class="form-floating py-2 col-12">
+                    <input asp-for="Maintenance.Amount" class="form-control border-0 shadow" />
+                    <label asp-for="Maintenance.Amount" class="ms-2"></label>
+                    <span asp-validation-for="Maintenance.Amount" class="text-danger"></span>
+                </div> *@
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Maintenance.ReceivedAmount" class="form-control border-0 shadow" />
+                    <label asp-for="Maintenance.ReceivedAmount" class="ms-2">Recived Amount</label>
+                    <span asp-validation-for="Maintenance.ReceivedAmount" class="text-danger"></span>
+
+                </div>
+                @* <div class="form-floating py-2 col-12">
+                    <input asp-for="Maintenance.PendingAmount" class="form-control border-0 shadow" />
+                    <label asp-for="Maintenance.PendingAmount" class="ms-2"></label>
+                    <span asp-validation-for="Maintenance.PendingAmount" class="text-danger"></span>
+
+                </div> *@
+                
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Maintenance.ReceivedDate" type="date" class="form-control border-0 shadow" />
+                    <label asp-for="Maintenance.ReceivedDate" class="ms-2">Received Date</label>
+                    <span asp-validation-for="Maintenance.ReceivedDate" class="text-danger"></span>
+
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Maintenance.EntryDate" type="date" class="form-control border-0 shadow" />
+                    <label asp-for="Maintenance.EntryDate" class="ms-2">Entry Date</label>
+                    <span asp-validation-for="Maintenance.EntryDate" class="text-danger"></span>
+
+                </div>
+
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Maintenance.Year" value="@DateTime.Now.Year.ToString()" class="form-control border-0 shadow" />
+                    <label asp-for="Maintenance.Year" class="ms-2"></label>
+                    <span asp-validation-for="Maintenance.Year" class="text-danger"></span>
+
+                </div>
+                <div class="form-floating py-2 col-12">
+                    <input asp-for="Maintenance.Month" type="month" class="form-control border-0 shadow" />
+                    <label asp-for="Maintenance.Month" class="ms-2"></label>
+                    <span asp-validation-for="Maintenance.Month" class="text-danger"></span>
+
+                </div>
+
+               @*  <div class="form-floating py-2 col-12">
+                    <input asp-for="Maintenance.FineAmount" class="form-control border-0 shadow" />
+                    <label asp-for="Maintenance.FineAmount" class="ms-2"></label>
+                    <span asp-validation-for="Maintenance.FineAmount" class="text-danger"></span>
+
+                </div> *@
+
+                <div class="row mt-3">
+                    <div class="col-6 col-md-3">
+                       
+                                <button type="submit" class="btn btn-primary form-control">Create</button>
+
+                          
+                    </div>
+
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Maintenance" asp-action="Index" class="btn btn-secondary border  form-control">
+                            Back to List
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+

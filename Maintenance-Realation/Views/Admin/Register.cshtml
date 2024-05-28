@@ -1,0 +1,385 @@
+﻿@model Society_Models.ViewModels.RegisterVM
+
+@{
+    var userName = HttpContextAccessor.HttpContext.Session.GetString("User");
+}
+
+<style>
+
+   body{
+         /* background-color: rgb(81, 91, 92); */
+        background-image: url('~/wwwroot/images/form-wizard-bg.jpg');
+   }
+
+   form{
+       padding: 12px;
+
+   }
+</style>
+@* <main class="img1 bg-dark col-sm-12">
+    <div class="container-fluid bg-dark text-light py-3 ">
+        <header class="text-center">
+            <h1 class="display-6">Register Your Society </h1>
+        </header>
+    </div>
+    <section class="container my-2 bg-dark w-50 text-light p-2">
+    <form class="row g-3 p-3" enctype="multipart/form-data" asp-action="Register" asp-controller="Admin" >
+       <fieldset class="row g-3 p-3">
+                <div class="col-md-4">
+                    <label asp-for="Image" class="form-label">Image</label>
+                    <input asp-for="Image" type="file" class="form-control" id="validationDefault01">
+                    <span asp-validation-for="Image"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="societyName" class="form-label"></label>
+                    <input asp-for="societyName" class="form-control" id="validationDefault02" required>
+                    <span asp-validation-for="societyName"></span>
+
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Address" class="form-label">Address</label>
+                    <input asp-for="Address" type="text" class="form-control" required>
+                    <span asp-validation-for="Address"></span>
+
+
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="PinCode" class="form-label">Pincode</label>
+                    <input asp-for="PinCode" class="form-control" id="inputEmail4">
+                    <span asp-validation-for="PinCode"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="State" class="form-label">State</label>
+                    <input asp-for="State" class="form-control" id="inputPassword4">
+                    <span asp-validation-for="State"></span>
+                </div>
+                <div class="col-12">
+                    <label asp-for="City" class="form-label"></label>
+                    <input asp-for="City" class="form-control" id="inputAddress2">
+                </div>
+                <div class="col-12">
+                    <label asp-for="LandMark" class="form-label">LandMark</label>
+                    <input asp-for="LandMark" class="form-control" id="inputAddress">
+                </div>
+
+                <div class="col-md-6">
+                    <label asp-for="BuiltYear" class="form-label"></label>
+                    <input asp-for="BuiltYear" class="form-control" id="inputCity">
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="RegistrationNo" class="form-label"></label>
+                    <input asp-for="RegistrationNo" class="form-control" id="inputCity">
+
+                </div>
+
+                <div class="col-12 text-end">
+                    <button class="btn btn-primary">next</button>
+                </div>
+      
+
+
+       </fieldset>
+
+       <fieldset>
+                <div class="col-md-4">
+                    <label asp-for="Name" class="form-label"></label>
+                    <input asp-for="Name"  class="form-control" id="validationDefault01">
+                    <span asp-validation-for="Name"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Email" class="form-label"></label>
+                    <input asp-for="Email" class="form-control" id="validationDefault02" required>
+                    <span asp-validation-for="Email"></span>
+
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Role"></label>
+                    <select asp-for="Role" class="form-select" asp-items="@Model.RoleList">
+                        <option disabled selected> --Select Role --</option>
+                    </select>
+                    <span asp-validation-for="Role" class="text-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="Password" class="form-label">Password: *</label>
+                    <input asp-for="Password" class="form-control" placeholder="Password" />
+                    <span asp-validation-for="Password" class="test-danger"></span>
+                </div>
+                <div class="col-md-4">
+                    <label asp-for="ConfirmPassword" class="form-label">Confirm Password: *</label>
+                    <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Password" />
+                    <span asp-validation-for="ConfirmPassword" class="test-danger"></span>
+                </div>
+                
+
+              
+       </fieldset>
+    </form>
+   </section>
+</main> *@
+
+
+
+ <div class="container-fluid">
+    <div class="row justify-content-center ">
+        <div class="col-11 col-sm-10 col-md-10 col-lg-6 col-xl-5 text-center p-0 mt-3 mb-2">
+            <div class="card px-0 pt-4 pb-0 mt-3 mb-3">
+                <h2 id="heading">Sign Up Your User Account</h2>
+                <p>Fill all form field to go to next step</p>
+                <form id="msform" asp-controller="Admin" asp-action="Register" enctype="multipart/form-data" >
+                    <!-- progressbar -->
+                    <ul id="progressbar">
+                        <li class="active" id="account"><strong>Society</strong></li>
+                        <li id="personal"><strong>Account</strong></li>
+                         <li id="payment"><strong>Image</strong></li> 
+                        <li id="confirm"><strong>Finish</strong></li> 
+                     </ul>
+                    <div class="progress">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div> <br> <!-- fieldsets -->
+                    <fieldset>
+                        <div class="form-card">
+                            <div class="row">
+                                <div class="col-7">
+                                    <h2 class="fs-title">Register Your Society:</h2>
+                                </div>
+                                <div class="col-5">
+                                    <h2 class="steps">Step 2 - 4</h2>
+                                </div>
+                            </div>
+                            <label asp-for="Image" class="fieldlabels">Image: *</label>
+                            <input asp-for="Image" type="file" name="file" placeholder="Image" />
+                            <span asp-validation-for="Image" class="text-danger"></span>
+
+                            <label  asp-for="societyName" class="fieldlabels">Society Name: *</label>
+                            <input asp-for="societyName"  placeholder="Soceity Name" />
+                            <span asp-validation-for="societyName" class="text-danger"></span>
+
+
+
+                            <label asp-for="Address" class="fieldlabels">Address: *</label>
+                            <input asp-for="Address"   placeholder="Address." />
+                            <span asp-validation-for="Address" class="text-danger"></span>
+
+                             <label asp-for="PinCode" class="fieldlabels">PinCode: *</label>
+                            <input asp-for="PinCode"  placeholder="PinCode." />
+                            <span asp-validation-for="PinCode" class="text-danger"></span>
+
+                            <label asp-for="State" class="fieldlabels">State: *</label>
+                            <input asp-for="State"  placeholder="State." />
+                            <span asp-validation-for="State" class="text-danger"></span>
+
+                            <label asp-for="City" class="fieldlabels">City: *</label>
+                            <input asp-for="City"   placeholder="City." />
+                            <span asp-validation-for="City" class="text-danger"></span>
+
+                            <label asp-for="LandMark" class="fieldlabels">LandMark: *</label>
+                            <input asp-for="LandMark"   placeholder="LandMark." />
+                            <span asp-validation-for="LandMark" class="text-danger"></span>
+
+                            <label asp-for="BuiltYear" class="fieldlabels">BuiltYear: *</label>
+                            <input asp-for="BuiltYear"  placeholder="BuiltYear." />
+                            <span asp-validation-for="BuiltYear" class="text-danger"></span>
+
+                            <label asp-for="RegistrationNo" class="fieldlabels">RegistrationNo: *</label>
+                            <input asp-for="RegistrationNo"   placeholder="RegistrationNo." />
+                            <span asp-validation-for="RegistrationNo" class="text-danger"></span>
+
+
+                            
+                        </div>
+                        <input type="button" name="next" class="next action-button" value="Next" />
+                    </fieldset>
+                    <fieldset>
+                        <div class="form-card">
+                            <div class="row">
+                                <div class="col-7">
+                                    <h2 class="fs-title">Account Information:</h2>
+                                </div>
+                                <div class="col-5">
+                                    <h2 class="steps">Step 1 - 4</h2>
+                                </div>
+                            </div> 
+                            <label asp-for="Name" class="fieldlabels">Name: *</label>
+                            <input asp-for="Name" placeholder="UserName" />
+                            <span asp-validation-for="Name" class="test-danger"></span>
+
+                            <label asp-for="Email" class="fieldlabels">Email: *</label>
+                            <input asp-for="Email" placeholder="Email Id" />
+                            <span asp-validation-for="Email" class="test-danger"></span>
+
+                           
+                           
+                            <label asp-for="Password" class="fieldlabels">Password: *</label>
+                            <input asp-for="Password" placeholder="Password" />
+                            <span asp-validation-for="Password" class="test-danger"></span>
+
+                            <label asp-for="ConfirmPassword" class="fieldlabels">Confirm Password: *</label>
+                            <input asp-for="ConfirmPassword" placeholder="Confirm Password" />
+                            <span asp-validation-for="ConfirmPassword" class="test-danger"></span>
+
+                        </div>
+
+                        <button class="btn btn-primary" type="submit">Submit</button>
+
+                        <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+
+                    </fieldset>
+                    
+                    <fieldset>
+                        <div class="form-card">
+                            <div class="row">
+                                <div class="col-7">
+                                    <h2 class="fs-title">Image Upload:</h2>
+                                </div>
+                                <div class="col-5">
+                                    <h2 class="steps">Step 3 - 4</h2>
+                                </div>
+                            </div> <label class="fieldlabels">Upload Your Photo:</label> <input type="file" name="pic" accept="image/*"> <label class="fieldlabels">Upload Signature Photo:</label> <input type="file" name="pic" accept="image/*">
+                        </div>
+                        <input type="button" name="next" class="next action-button" value="Submit" />
+                        <input type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                    </fieldset> 
+                    <fieldset>
+                        <div class="form-card">
+                            <div class="row">
+                                <div class="col-7">
+                                    <h2 class="fs-title">Finish:</h2>
+                                </div>
+                                <div class="col-5">
+                                    <h2 class="steps">Step 4 - 4</h2>
+                                </div>
+                            </div> <br><br>
+                            <h2 class="purple-text text-center"><strong>SUCCESS !</strong></h2> <br>
+                            <div class="row justify-content-center">
+                                <div class="col-3"> <img src="https://i.imgur.com/GwStPmg.png" class="fit-image"> </div>
+                            </div> <br><br>
+                            <div class="row justify-content-center">
+                                <div class="col-7 text-center">
+                                    <h5 class="purple-text text-center">You Have Successfully Signed Up</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset> 
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 
+ 
+
+@* <form method="post" asp-controller="Admin" asp-action="Register" >
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger" ></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="SocietyId"></label>
+        <select asp-for="SocietyId" class="select-form" asp-items="@Model.SocietyList" > 
+            <option disabled selected > --Select Your Society--</option>
+         </select>
+        <span asp-validation-for="SocietyId" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ConfirmPassword"></label>
+        <input asp-for="ConfirmPassword" class="form-control" />
+        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+ *@
+
+
+@section Scripts {
+    <script >
+
+        $(document).ready(function () {
+
+            var current_fs, next_fs, previous_fs; //fieldsets
+            var opacity;
+            var current = 1;
+            var steps = $("fieldset").length;
+
+            setProgressBar(current);
+
+            $(".next").click(function () {
+
+                current_fs = $(this).parent();
+                next_fs = $(this).parent().next();
+
+                //Add Class Active
+                $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+                //show the next fieldset
+                next_fs.show();
+                //hide the current fieldset with style
+                current_fs.animate({ opacity: 0 }, {
+                    step: function (now) {
+                        // for making fielset appear animation
+                        opacity = 1 - now;
+
+                        current_fs.css({
+                            'display': 'none',
+                            'position': 'relative'
+                        });
+                        next_fs.css({ 'opacity': opacity });
+                    },
+                    duration: 500
+                });
+                setProgressBar(++current);
+            });
+
+            $(".previous").click(function () {
+
+                current_fs = $(this).parent();
+                previous_fs = $(this).parent().prev();
+
+                //Remove class active
+                $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+                //show the previous fieldset
+                previous_fs.show();
+
+                //hide the current fieldset with style
+                current_fs.animate({ opacity: 0 }, {
+                    step: function (now) {
+                        // for making fielset appear animation
+                        opacity = 1 - now;
+
+                        current_fs.css({
+                            'display': 'none',
+                            'position': 'relative'
+                        });
+                        previous_fs.css({ 'opacity': opacity });
+                    },
+                    duration: 500
+                });
+                setProgressBar(--current);
+            });
+
+            function setProgressBar(curStep) {
+                var percent = parseFloat(100 / steps) * curStep;
+                percent = percent.toFixed();
+                $(".progress-bar")
+                    .css("width", percent + "%")
+            }
+
+            $(".submit").click(function () {
+                return false;
+            })
+
+        });
+    </script>
+   
+}

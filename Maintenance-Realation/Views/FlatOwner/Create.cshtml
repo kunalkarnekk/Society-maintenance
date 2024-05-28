@@ -1,0 +1,138 @@
+﻿@model Society_Models.ViewModels.FlatOwnerVM
+
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Add Flat Owners</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body p-4">
+        <form method="post" asp-action="Create" asp-controller="FlatOwner">
+            <div class="border p-3 mt-4">
+               <div class="row">
+                    <div class="form-floating py-2 col-4">
+                        <input asp-for="FlatOwner.FirstName" class="form-control border-0 shadow" />
+                        <label asp-for="FlatOwner.FirstName" class="ms-2">First Name</label>
+                        <span asp-validation-for="FlatOwner.FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating py-2 col-4">
+                        <input asp-for="FlatOwner.MiddleName" class="form-control border-0 shadow" />
+                        <label asp-for="FlatOwner.MiddleName" class="ms-2">Middle Name</label>
+                        <span asp-validation-for="FlatOwner.MiddleName" class="text-danger"></span>
+
+                    </div>
+                    <div class="form-floating py-2 col-4">
+                        <input asp-for="FlatOwner.LastName" class="form-control border-0 shadow" />
+                        <label asp-for="FlatOwner.LastName" class="ms-2">Last Name</label>
+                        <span asp-validation-for="FlatOwner.LastName" class="text-danger"></span>
+
+                    </div>
+               </div>
+               <div class="row">
+                    <div class="form-floating py-2 col-6">
+                        <input asp-for="FlatOwner.ContactNumber" class="form-control border-0 shadow" />
+                        <label asp-for="FlatOwner.ContactNumber" class="ms-2">Mobile Number</label>
+                        <span asp-validation-for="FlatOwner.ContactNumber" class="text-danger"></span>
+
+                    </div>
+                    <div class="form-floating py-2 col-6">
+                        <input asp-for="FlatOwner.Email" class="form-control border-0 shadow" />
+                        <label asp-for="FlatOwner.Email" class="ms-2">Email</label>
+                        <span asp-validation-for="FlatOwner.Email" class="text-danger"></span>
+
+                    </div>
+               </div>
+
+               <div class="row">
+                    <div class="form-floating py-2 col-4">
+                        <input asp-for="FlatOwner.FlatNumber" class="form-control border-0 shadow" />
+                        <label asp-for="FlatOwner.FlatNumber" class="ms-2">Flat Number</label>
+                        <span asp-validation-for="FlatOwner.FlatNumber" class="text-danger"></span>
+
+                    </div>
+                    <div class="form-floating py-2 col-8">
+                        <select asp-for="FlatOwner.OwnerType" asp-items="Html.GetEnumSelectList<OwnerType>()" class="form-select border-0 shadow">
+                            <option value="">--Select Owner Type--</option>
+                        </select>
+                        <label asp-for="FlatOwner.OwnerType" class="ms-2">Owner Type</label>
+                        <span asp-validation-for="FlatOwner.OwnerType" class="text-danger"></span>
+
+                    </div>
+                   
+               </div>
+
+               <div class="row">
+                    <div class="form-group py-2 col-4">
+                        <label asp-for="FlatOwner.IsSocietyMember">Society Member :</label>
+                        <div class="d-flex">
+                            <div class="form-check ml-2">
+                                <input asp-for="FlatOwner.IsSocietyMember" class="form-check-input" type="radio" value="true" id="isSocietyMemberYes" onclick="showDesignationSelect()">
+                                <label class="form-check-label" for="isSocietyMemberYes">Yes</label>
+                            </div>
+                            <div class="form-check ml-3">
+                                <input asp-for="FlatOwner.IsSocietyMember" class="form-check-input ml-4" type="radio" value="false" id="isSocietyMemberNo" onclick="hideDesignationSelect()">
+                                <label class="form-check-label" for="isSocietyMemberNo">No</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="designationSelectContainer" class="form-group col-4" style="display: none;">
+                        <select asp-for="FlatOwner.DesiginationName" asp-items="Model.DesignationList" class="form-select border-0 shadow">
+                            <option value="" disabled selected>--Select Designation--</option>
+                        </select>
+                    </div>
+
+
+                    @if(Model.FlatOwner.SocietyId != 0)
+                    {
+                        <div class="form-group col-4">
+                            <label asp-for="FlatOwner.IsActive">Is Active:</label>
+                            <div class="form-check">
+                                <input asp-for="FlatOwner.IsActive" checked class="form-check-input" type="radio" value="true" id="isActiveYes">
+                                <label class="form-check-label" for="isActiveYes">Yes</label>
+                            </div>
+                            <div class="form-check">
+                                <input asp-for="FlatOwner.IsActive" class="form-check-input" type="radio" value="false" id="isActiveNo">
+                                <label class="form-check-label" for="isActiveNo">No</label>
+                            </div>
+                        </div>
+                    }
+               </div>
+
+                <div class="row mt-3 ">
+                    <div class="col-6 col-md-3">
+
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-primary form-control">Add Owners</button>
+                    </div>
+
+                    <div class="col-6 col-md-3 ">
+                        <a asp-controller="FlatOwner" asp-action="Index" class="btn btn-secondary border  form-control">
+                            Back to List
+                        </a>
+                    </div>
+                    <div class="col-6 col-md-3">
+                    </div>
+                </div>
+
+        </form>
+    </div>
+</div>
+
+
+
+<script>
+    function showDesignationSelect() {
+        var designationSelectContainer = document.getElementById("designationSelectContainer");
+        designationSelectContainer.style.display = "block";
+    }
+
+    function hideDesignationSelect() {
+        var designationSelectContainer = document.getElementById("designationSelectContainer");
+        designationSelectContainer.style.display = "none";
+    }
+</script>

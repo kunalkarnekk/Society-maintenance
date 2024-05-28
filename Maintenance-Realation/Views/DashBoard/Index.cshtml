@@ -1,0 +1,154 @@
+﻿
+
+<style>
+  
+
+    .card {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        background-color: #f0f0f0;
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .summary {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .summary-item {
+        flex-basis: 30%;
+    }
+
+    .total {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+        .total h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .total p {
+            font-size: 36px;
+            color: #007bff;
+        }
+
+
+
+    
+</style>
+
+
+<div class="container" >
+    <div class="row position-relative " style="top:100px;">
+        <div class="col-md-4 mb-4 ">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    Owners Details
+                </div>
+                <div class="card-body">
+                    <div class="summary">
+                        <div class="summary-item">
+                            <h5>Flat Owners Own</h5>
+                            <p>@ViewBag.FlatOwnersCountOwn</p>
+                        </div>
+                        <div class="summary-item">
+                            <h5>Flat Owners rent</h5>
+                            <p>@ViewBag.FlatOwnersRentCount</p>
+                        </div>
+                        <div class="summary-item">
+                            <h5>Flat Owner builder</h5>
+                            <p>@ViewBag.FlatOwnersRentCount</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-header bg-secondary text-white">
+                    Credit and Pending Amount - Monthly
+                </div>
+                <div class="card-body">
+                    <div class="summary">
+                        <div class="summary-item">
+                            <h5>Credit Amount</h5>
+                            <p>@ViewBag.creditAmount</p>
+                        </div>
+                        <div class="summary-item">
+                            <h5>Pending Amount</h5>
+                            <p>@ViewBag.pendingAmount</p>
+                        </div>
+                        <div class="summary-item">
+                            <h5>Fine Amount</h5>
+                            <p>@ViewBag.PendingFineAmount</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    Credit and Pending Amount - Yealy
+                </div>
+                <div class="card-body">
+                    <div class="summary">
+                        <div class="summary-item">
+                            <h5>Credit Amount</h5>
+                            <p>@ViewBag.creditAmount</p>
+                        </div>
+                        <div class="summary-item">
+                            <h5>Pending Amount</h5>
+                            <p>@ViewBag.pendingAmount</p>
+                        </div>
+                        <div class="summary-item">
+                            <h5>Fine Amount</h5>
+                            <p>@ViewBag.PendingFineAmountYear</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row position-relative " style="top:100px;">
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    Society Expense - 
+                </div>
+                <div class="card-body">
+                    <div class="summary">
+                        <div class="summary-item">
+                            <h5>Expense Amount - Monthly</h5>
+                            <p>@ViewBag.MonthlyExpense</p>
+                        </div>
+                        <div class="summary-item">
+                            <h5>Expense Amount - Yearly</h5>
+                            <p>@ViewBag.YearlyExpenset</p>
+                        </div>
+                       
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

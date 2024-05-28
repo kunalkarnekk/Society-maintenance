@@ -1,0 +1,59 @@
+﻿@model Settings
+
+<div class="card shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">
+                    @(Model.Id != 0 ? "Update" : "Add") Settings
+
+                </h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body p-4">
+        <form method="post" asp-action="Upsert" asp-controller="Settings">
+            <div class="border p-3 mt-4">
+                <input asp-for="Id" hidden />
+                <input asp-for="SocietyId" hidden />
+                 <div class="row">
+                    <div class="form-floating py-2 col-6">
+                        <input asp-for="OwnerMaintenanceCost" class="form-control border-0 shadow" />
+                        <label asp-for="OwnerMaintenanceCost" class="ms-2"></label>
+                        <span asp-validation-for="OwnerMaintenanceCost" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating py-2 col-6">
+                        <input asp-for="RentMaintenanceCost" class="form-control border-0 shadow" />
+                        <label asp-for="RentMaintenanceCost" class="ms-2"></label>
+                        <span asp-validation-for="RentMaintenanceCost" class="text-danger"></span>
+                    </div>
+                 </div>
+                <div class="row">
+                    <div class="form-floating py-2 col-6">
+                        <input asp-for="FineAmount" class="form-control border-0 shadow" />
+                        <label asp-for="FineAmount" class="ms-2"></label>
+                        <span asp-validation-for="FineAmount" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating py-2 col-6">
+                        <input type="date" asp-for="MaintenanceDate" class="form-control border-0 shadow" />
+                        <label asp-for="MaintenanceDate" class="ms-2"></label>
+                        <span asp-validation-for="MaintenanceDate" class="text-danger"></span>
+                    </div>
+                </div>
+              
+            </div>
+
+
+            <div class="row mt-3 ">
+
+                <div class="col-6 col-md-3 text-end">
+                     <button type="submit" class="btn btn-primary form-control text-center">Submit</button>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+</div>
+

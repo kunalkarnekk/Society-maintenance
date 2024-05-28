@@ -1,0 +1,233 @@
+﻿
+<style>
+    .card {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        background-color: #f0f0f0;
+        padding: 10px;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .summary {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .summary-item {
+        flex-basis: 30%;
+    }
+
+    .total {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+        .total h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .total p {
+            font-size: 36px;
+            color: #007bff;
+        }
+
+</style>
+
+@model MaintenanceVM
+
+
+<div class="card col-12 shadow border-0 mt-4">
+    <div class="card-header bg-secondary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">All Maintenance</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <div class="row pb-3">
+            <div class="col-12 p-2">
+                <div class="card">
+                    <div class="card-header">
+                        <h1 class="text-center">Summary</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="summary">
+                            <div class="summary-item">
+                                <h5>Maintenance</h5>
+                                <p>@ViewBag.maintenanceAmount</p>
+                            </div>
+                            <div class="summary-item">
+                                <h5>Expenses</h5>
+                                <p>@ViewBag.ExpenseAmount</p>
+                            </div>
+                            <div class="summary-item">
+                                <h5>Maintenance</h5>
+                                <p>@ViewBag.PendingFineAmount</p>
+                            </div>
+                            <div class="summary-item">
+                                <h5>Fine</h5>
+                                <p>@ViewBag.PendingFineAmount</p>
+                            </div> 
+                            <div class="summary-item">
+                                <h5>Received</h5>
+                                <p>@ViewBag.ReceivedAmount</p>
+                            </div>
+
+                            <div class="summary-item">
+                                <h5>Pending</h5>
+                                <p>@ViewBag.PendingFineAmount</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+          @*   <div class="col-5">
+                <form asp-action="Index" asp-controller="Maintenance" method="get">
+                    <div class="row justify-content">
+                        <div class="form-floating py-2 col-4">
+                            <select id="year" name="Year" class="form-select border-0 shadow">
+                                @foreach (var year in Model.YearsList)
+                                {
+                                    <option value="@DateTime.Now.Year">@year</option>
+                                }
+                            </select>
+                            <label for="Year">Year</label>
+                        </div>
+
+                        <div class="form-floating py-2 col-8 mx-auto">
+                            <label for="Month">Month</label>
+                            <div class="input-group">
+                                <button id="prev" class="btn btn-secondary rounded-start">&lt;</button>
+                                <input type="text" id="month" class="form-control border-0 shadow" readonly>
+                                <button id="next" class="btn btn-secondary rounded-end">&gt;</button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <button type="submit" class="btn btn-secondary mt-2">Show</button>
+                </form>
+
+
+            </div> *@
+
+           
+        </div>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead class="thead-light">
+                    <tr>
+                        <th>Name</th>
+                        <th>Amount</th>
+                        <th>Received Amount</th>
+                        <th>Pending Amount</th>
+                        <th>Received Date</th>
+                        <th>Fine Amount</th>
+                        <th>Paid</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Maintenance1.Count > 0)
+                    {
+                        @foreach (var obj in Model.Maintenance1)
+                        {
+                            <tr>
+                                <td>@obj.FlatOwner.FirstName</td>
+                                <td>@obj.Amount</td>
+                                <td>@obj.ReceivedAmount</td>
+                                @{
+                                    var TotalPendingAmount = obj.PendingAmount + obj.FineAmount;
+                                }
+                                <td style="@(obj.PendingAmount > 0 ? "background-color: #ffcccc;"  : ""))">
+                                    @TotalPendingAmount
+                                </td>
+
+                                <td>@obj.ReceivedDate</td>
+                                <td style="@(obj.FineAmount > 0 ? "background-color: #ffcccc;" :  "")">@obj.FineAmount</td>
+                                <td>
+                                    <div class="form-check">
+                                        <form method="post" asp-action="Index" asp-controller="Maintenance" id="maintenanceForm">
+                                            <input class="form-check-input" asp-route-id="@obj.Id" asp-for="Maintenance.Paid" type="checkbox" value="true" id="flexCheckChecked">
+                                            <button class="btn btn-sm-primary">Paid</button>
+                                        </form>
+                                        @* <label asp-for="Maintenance.Paid" class="form-check-label" for="flexCheckChecked">                                    
+                                        </label> *@
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        @if (obj.PendingAmount == 0)
+                                        {
+                                            <a asp-controller="Maintenance" asp-action="Edit" asp-route-id="@obj.Id" class="btn btn-primary btn-sm">
+                                                <i class="bi bi-pencil-square"></i> Pay
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-controller="Maintenance" asp-action="PayPendingAmount" asp-route-id="@obj.Id" class="btn btn-warning btn-sm">
+                                                <i class="bi bi-pencil-square"></i> Pay Pending Amount
+                                            </a>
+                                        }
+                                        <a asp-controller="Maintenance" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-danger btn-sm">
+                                            <i class="bi bi-trash-fill"></i> Delete
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="12" class="text-center">No Maintenance This Month</td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+
+
+@section Scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var checkbox = document.getElementById("flexCheckChecked");
+
+            checkbox.addEventListener("change", function () {
+                var isChecked = this.checked;
+                saveCheckboxValue(isChecked);
+            });
+        });
+
+        function saveCheckboxValue(value) {
+            var formData = new FormData();
+            formData.append('isChecked', value);
+
+            fetch('/Maintenance/SaveCheckboxValue', {
+                method: 'POST',
+                body: formData
+            })
+    </script>
+}

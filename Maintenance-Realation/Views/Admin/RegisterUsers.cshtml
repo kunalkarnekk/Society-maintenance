@@ -1,0 +1,43 @@
+﻿@model RegisterUserVM;
+
+
+
+<div class="row col-md-10 offset-md-1">
+    @* <h1 class="text-center text-primary pt-2">Log In</h1> *@
+    <form method="post" asp-controller="Admin" asp-action="RegisterUsers">
+        <div class="border p-2 rounded">
+            <h1 class="text-center">Admin Access</h1>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <select asp-for="Name" asp-items="@Model.FlatOwners" class="form-select border-0 shadow">
+                    <option value=""> Select Owner </option>
+                </select>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Role" class="control-label"></label>
+                <select asp-for="Role" asp-items="@Model.Roles" class="form-select border-0 shadow">
+                    <option value=""> Select Role </option>
+                </select>
+                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
+            <div class="form-group pt-3">
+
+                <div class="col-md-6 offset-md-3">
+                    <button class="btn btn-success form-control" type="submit">
+                        Admin Access
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts
+{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

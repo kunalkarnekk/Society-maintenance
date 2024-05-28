@@ -1,0 +1,51 @@
+﻿@*  <link rel="stylesheet" href="~/css1/blue.css">
+<link rel="stylesheet" href="~/css1/indigo.css"> *@
+ @* <link rel="stylesheet" href="~/css/site.css"> *@
+ 
+
+ <style>
+     *{
+         margin: 0;
+         padding: 0;
+     }
+     .second{
+         height: 100vh;
+         width: 100%;
+         background-color: black;
+     }
+
+     body{
+         background-color:black;
+     }
+
+     .third
+     {
+         position:relative;
+         top: 7rem;
+     }
+
+     
+ </style>
+ 
+
+
+<section class="py-7 py-md-0 bg-hero"  id="home">
+    <div class="container ">
+        <div class="col-12 bg-dark second ">
+            <div class="row vh-md-100 third">
+                <div class="col-md-8 col-sm-10 col-12 mx-auto my-auto text-center">
+                    <h1 class="heading-black text-white text-capitalize">Enhance Community Living with Smart Maintenance</h1>
+                    <p class="lead py-3 text-white">
+                        Empower your community with Society Maintenance, a comprehensive platform designed to streamline all aspects of community living. From managing finances to coordinating maintenance, our intuitive tools ensure seamless operations, fostering a harmonious and thriving environment for all residents.
+                    </p>
+                    <a asp-action="Register" asp-controller="Admin">
+                        <button class="btn btn-primary d-inline-flex flex-row align-items-center" style="color:white; background-color:blue;">
+                            Register Your Society <em class="ml-2" data-feather="arrow-right"></em>
+                        </button>
+                    </a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
